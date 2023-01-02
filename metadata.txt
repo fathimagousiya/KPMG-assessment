@@ -1,0 +1,120 @@
+Create a linux based virtual machine on azure
+access it via putty.
+Run below commands as admin (sudo -i)
+install python
+> apt install python
+> apt install jq
+Now excute the below command to access azure instance metadata service
+> curl -s -H Metadata:true --noproxy "*" "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | jq
+
+output
+---------------
+root@metadatavm:~# curl -s -H Metadata:true --noproxy "*" "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | jq                                                                           4/metadata/instance?api-version=2021-02-01" | jq
+{
+  "compute": {
+    "azEnvironment": "AzurePublicCloud",
+    "customData": "",
+    "evictionPolicy": "",
+    "isHostCompatibilityLayerVm": "false",
+    "licenseType": "",
+    "location": "NorwayEast",
+    "name": "metadatavm",
+    "offer": "0001-com-ubuntu-server-focal",
+    "osProfile": {
+      "adminUsername": "azureadmin",
+      "computerName": "metadatavm",
+      "disablePasswordAuthentication": "false"
+    },
+    "osType": "Linux",
+    "placementGroupId": "",
+    "plan": {
+      "name": "",
+      "product": "",
+      "publisher": ""
+    },
+    "platformFaultDomain": "0",
+    "platformUpdateDomain": "0",
+    "priority": "",
+    "provider": "Microsoft.Compute",
+    "publicKeys": [],
+    "publisher": "canonical",
+    "resourceGroupName": "metadata",
+    "resourceId": "/subscriptions/6b8c1796-9e1a-488d-9aa2-676399f5cd0a/resourceG                                                                             roups/metadata/providers/Microsoft.Compute/virtualMachines/metadatavm",
+    "securityProfile": {
+      "secureBootEnabled": "false",
+      "virtualTpmEnabled": "false"
+    },
+    "sku": "20_04-lts-gen2",
+    "storageProfile": {
+      "dataDisks": [],
+      "imageReference": {
+        "id": "",
+        "offer": "0001-com-ubuntu-server-focal",
+        "publisher": "canonical",
+        "sku": "20_04-lts-gen2",
+        "version": "latest"
+      },
+      "osDisk": {
+        "caching": "ReadWrite",
+        "createOption": "FromImage",
+        "diffDiskSettings": {
+          "option": ""
+        },
+        "diskSizeGB": "30",
+        "encryptionSettings": {
+          "enabled": "false"
+        },
+        "image": {
+          "uri": ""
+        },
+        "managedDisk": {
+          "id": "/subscriptions/6b8c1796-9e1a-488d-9aa2-676399f5cd0a/resourceGro                                                                             ups/metadata/providers/Microsoft.Compute/disks/metadatavm_disk1_a8f0e103888643c1                                                                             8fa9f801bfd037e4",
+          "storageAccountType": "Premium_LRS"
+        },
+        "name": "metadatavm_disk1_a8f0e103888643c18fa9f801bfd037e4",
+        "osType": "Linux",
+        "vhd": {
+          "uri": ""
+        },
+        "writeAcceleratorEnabled": "false"
+      },
+      "resourceDisk": {
+        "size": "34816"
+      }
+    },
+    "subscriptionId": "6b8c1796-9e1a-488d-9aa2-676399f5cd0a",
+    "tags": "",
+    "tagsList": [],
+    "userData": "",
+    "version": "20.04.202212140",
+    "vmId": "78f9e231-e272-4296-8824-dead059843ea",
+    "vmScaleSetName": "",
+    "vmSize": "Standard_B1s",
+    "zone": ""
+  },
+  "network": {
+    "interface": [
+      {
+        "ipv4": {
+          "ipAddress": [
+            {
+              "privateIpAddress": "10.0.0.4",
+              "publicIpAddress": ""
+            }
+          ],
+          "subnet": [
+            {
+              "address": "10.0.0.0",
+              "prefix": "24"
+            }
+          ]
+        },
+        "ipv6": {
+          "ipAddress": []
+        },
+        "macAddress": "002248754825"
+      }
+    ]
+  }
+}
+root@metadatavm:~#
